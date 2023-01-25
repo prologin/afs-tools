@@ -1,0 +1,38 @@
+[tool.poetry]
+name = "afs-tools"
+version = "0.0.0"  # overriden on release in CI
+description = "Tools to work with an AFS setup"
+authors = [
+    "Marc 'risson' Schmitt <marc.schmitt@prologin.org>",
+    "Association Prologin <info@prologin.org>",
+]
+license = "GPL-3.0-or-later"
+readme = "README.md"
+repository = "https://gitlab.com/prologin/tech/tools/afs-tools"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+click = "^8.1"
+dataconf = "^2.1"
+python-ldap = "^3.4"
+sh = "^1.14"
+
+[tool.poetry.dev-dependencies]
+black = "*"
+ipython = "*"
+isort = "*"
+prospector = { version = "*", extras = ["with_everything"] }
+
+[tool.poetry.scripts]
+afs-tools = "afs_tools.__main__:main"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 79
+
+[tool.isort]
+profile = "black"
+line_length = 79
