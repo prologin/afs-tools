@@ -88,7 +88,7 @@ def vos_listvol(
     results = []
 
     # TODO: user `-extended -format` for parsing
-    args = [*cfg.vos_default_args, "-server", "addr.adrr"]
+    args = [*cfg.vos_default_args, "-server", addr.addr]
     if part:
         args += ["-partition", part.part]
 
@@ -103,7 +103,11 @@ def vos_listvol(
         if "****" in entry:
             continue
 
-        name, vol_id, vol_type, size, _, status = entry.strip().split()
+        entry = entry.strip()
+        if not entry:
+            continue
+
+        name, vol_id, vol_type, size, _, status = entry.split()
         results.append(
             VosVolume(name, int(vol_id), vol_type, int(size), status)
         )
@@ -152,7 +156,7 @@ def fs_configure_volume_mount(
 
     for path in user_paths[:-1]:
         home_path /= path
-        utils.cmd_dry(mkdir.bake(home_path), dry)
+        utils.cmd_dry(mkdir.bake("-p", home_path), dry)
         utils.cmd_dry(chown.bake("root:root", home_path), dry)
     home_path /= user_paths[-1]
 
