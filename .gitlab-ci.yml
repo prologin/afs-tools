@@ -143,7 +143,7 @@ release container:
 
 release:
   stage: release
-  image: registry.gitlab.com/prologin/tech/tools/renogin:v1.0.1
+  image: registry.gitlab.com/prologin/tech/tools/renogin:v1.0.2
   variables:
     GIT_STRATEGY: clone
     GIT_DEPTH: 0

@@ -1,0 +1,4 @@
+---
+other:
+    - |
+      chore(deps): update registry.gitlab.com/prologin/tech/tools/renogin docker tag to v1.0.2.
