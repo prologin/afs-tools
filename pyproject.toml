@@ -10,6 +10,11 @@ license = "GPL-3.0-or-later"
 readme = "README.md"
 repository = "https://gitlab.com/prologin/tech/tools/afs-tools"
 
+[[tool.poetry.source]]
+name = "gitlab-prologin"
+url = "https://gitlab.com/api/v4/groups/prologin/-/packages/pypi/simple"
+secondary = true
+
 [tool.poetry.dependencies]
 python = ">=3.9,<4"
 click = "^8.1"
@@ -21,7 +26,9 @@ sh = "^1.14"
 black = "*"
 ipython = "*"
 isort = "*"
+pre-commit = "*"
 prospector = { version = "*", extras = ["with_everything"] }
+renogin = "*"
 
 [tool.poetry.scripts]
 afs-tools = "afs_tools.__main__:main"

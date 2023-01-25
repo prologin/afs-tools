@@ -26,10 +26,13 @@
 
         overrides = pkgs.poetry2nix.overrides.withDefaults (self: super: {
           dataconf = super.dataconf.overridePythonAttrs (old: {
-            propagatedBuildInputs = old.propagatedBuildInputs ++ [ self.poetry ];
+            buildInputs = old.buildInputs ++ [ self.poetry ];
           });
-          poetry-semver = super.poetry-semver.overridePythonAttrs (old: {
-            propagatedBuildInputs = old.propagatedBuildInputs ++ [ self.poetry ];
+          pathspec = super.pathspec.overridePythonAttrs (old: {
+            propagatedBuildInputs = old.propagatedBuildInputs ++ [ self.flit-core ];
+          });
+          pies = super.pies.overridePythonAttrs (old: {
+            propagatedBuildInputs = old.propagatedBuildInputs ++ [ self.setuptools ];
           });
           pydocstyle = super.pydocstyle.overridePythonAttrs (old: {
             propagatedBuildInputs = old.propagatedBuildInputs ++ [ self.poetry ];

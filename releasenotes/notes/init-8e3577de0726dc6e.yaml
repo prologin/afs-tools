@@ -1,0 +1,6 @@
+---
+prelude: >
+    This is the first release of afs-tools. It's very barebones as-is, a lot of
+    configuration is still hardcoded, but the structure is here to allow
+    improvements. Creating and removing users works fine. Removing volumes too,
+    expect if they have a mountpoint, which currently isn't removed.

@@ -14,12 +14,9 @@ ENV DEBIAN_FRONTEND=noninteractive \
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         git make \
-        curl ca-certificates gnupg apt-transport-https
-
-RUN curl --location \
-        --output /usr/local/bin/release-cli \
-        "https://gitlab.com/api/v4/projects/gitlab-org%2Frelease-cli/packages/generic/release-cli/latest/release-cli-linux-amd64" && \
-    chmod +x /usr/local/bin/release-cli
+        curl ca-certificates gnupg apt-transport-https \
+        libssl-dev \
+        libldap2-dev libsasl2-dev
 
 ARG INCLUDE_DEV_DEPS=false
 
@@ -36,11 +33,11 @@ RUN --mount=type=bind,target=./pyproject.toml,src=./pyproject.toml \
     python -m venv /opt/venv && \
     pip3 install --upgrade pip && \
     pip3 install poetry && \
-    poetry install $(if [ $INCLUDE_DEV_DEPS = "false" ]; then echo "--no-dev"; fi)
+    poetry install $(if [ $INCLUDE_DEV_DEPS = "false" ]; then echo "--only=main"; else echo "--with=dev"; fi)
 
 COPY ./ /afs_tools
 WORKDIR /afs_tools
-RUN poetry install
+RUN poetry install --only=root
 
 FROM base
 
