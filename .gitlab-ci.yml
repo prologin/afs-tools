@@ -85,6 +85,16 @@ build:
     paths:
       - dist/*
 
+typing:
+  stage: test
+  needs:
+    - container build ci
+  image: $CI_REGISTRY_IMAGE/ci/$CI_COMMIT_REF_SLUG:$CI_COMMIT_SHA
+  before_script:
+    - poetry install --only=dev
+  script:
+    - mypy .
+
 deploy:
   stage: deploy
   image: $CI_REGISTRY_IMAGE/ci/$CI_COMMIT_REF_SLUG:$CI_COMMIT_SHA
