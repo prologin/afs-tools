@@ -6,7 +6,7 @@ import ldap  # type: ignore
 from afs_tools.config import LdapConfig
 
 
-@dataclass
+@dataclass(frozen=True)
 class LDAPUser:
     dn: str
     uid: str
@@ -21,7 +21,7 @@ def users_search(
         cfg.user_base, ldap.SCOPE_SUBTREE, cfg.user_filter
     )
 
-    result_type, result_data =  client.result(ldap_search_id, 1)
+    result_type, result_data = client.result(ldap_search_id, 1)
 
     if result_type != ldap.RES_SEARCH_RESULT:
         return []
